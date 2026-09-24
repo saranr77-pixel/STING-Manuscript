@@ -51,7 +51,7 @@ res = pd.DataFrame(rows)
 res["FDR"] = stats.false_discovery_control(res["p"], method="bh")
 res["direction"] = np.where(res["FDR"] >= .05, "ns",
                             np.where(res["diff_log2"] < 0, "lower in tumor", "higher in tumor"))
-res = res.sort_values("diff_log2").reset_index(drop=True)
+res = res.sort_values("tissue").reset_index(drop=True)
 res.to_csv("figures/STING1_pancancer_xena_stats.csv", index=False)
 print(res.round(4).to_string(index=False))
 
